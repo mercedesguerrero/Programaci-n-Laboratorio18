@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1522188566 source:c:\test\mercedes guerrero\genericas\main.c
+	<stdio.h>
+	<stdlib.h>
+

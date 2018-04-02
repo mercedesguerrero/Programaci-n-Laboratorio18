@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1521837960 source:c:\test\mercedes guerrero\parcialito1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<limits.h>
+
