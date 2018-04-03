@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/** \brief Pide al usuario 2 números enteros y los suma
+ *
+ * \param
+ * \param
+ * \return La suma de los números
+ *
+ */
+
+
 int sumarNumeros(void);
 
 int main()
