@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1522787264 source:c:\test\mercedes guerrero\factorial\main.c
+	<stdio.h>
+	<stdlib.h>
+

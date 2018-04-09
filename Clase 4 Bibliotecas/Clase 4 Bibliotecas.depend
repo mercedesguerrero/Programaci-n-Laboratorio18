@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1522784691 source:c:\test\mercedes guerrero\clase 4 bibliotecas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1522784629 source:c:\test\mercedes guerrero\clase 4 bibliotecas\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1522784927 c:\test\mercedes guerrero\clase 4 bibliotecas\funciones.h
+

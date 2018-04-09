@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1522795968 source:c:\test\mercedes guerrero\calculadora en clase\calculadora.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"Calculadora.h"
+
+1522796166 c:\test\mercedes guerrero\calculadora en clase\calculadora.h
+
