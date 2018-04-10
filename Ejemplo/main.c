@@ -21,7 +21,7 @@ int main()
 
     printf("\nEl numero entero es: %d y el numero flotante es: %.2f \n", numero1, numero2);
     printf("\nLa suma de los numeros es: %.2f \n", numero1 + numero2);
-    printf("\nLa letra ingresada es: %c \n", letra);0.
+    printf("\nLa letra ingresada es: %c \n", letra);
 
 
     return 0;
