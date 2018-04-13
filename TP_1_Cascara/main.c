@@ -43,6 +43,7 @@ int main()
                 seguir = 'n';
                 break;
         }
+    }
 
 
     return 0;

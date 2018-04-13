@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1523400611 source:c:\test\mercedes guerrero\cadenas de caracteres2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
