@@ -19,7 +19,7 @@ int validarEntero(int dato, int min, int max)
 {
     while(dato < min || dato >max)
     {
-        printf("Error: Ingrese entre %d y %d", min, max);
+        printf("Error: Ingrese entre %d y %d\n", min, max);
         scanf("%d", &dato);
     }
     return dato;

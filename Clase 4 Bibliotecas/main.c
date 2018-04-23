@@ -11,6 +11,7 @@
  *
  */
 
+int pedirEntero(char[], int, int);
 
 int main()
 {

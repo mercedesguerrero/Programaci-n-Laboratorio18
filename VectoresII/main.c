@@ -13,17 +13,14 @@ int buscarMaximo(int[], int);
 
 int main()
 {
-    int vector[TAM] ={1,3,4,2,9};
-    int i;
-    int j;
-    int aux;
+    int vector[TAM] ={50,34,42,21,67};
     int maximo;
+    int tam=0;
 
-    maximo= buscarMaximo(vector, TAM);
+    maximo= buscarMaximo(vector, tam);
     printf("El valor maximo del vector es: %d\n", maximo);
 
-    printf("Vector ordenado \n");
-    mostrarVector(vector, 5);
+    ordenarVector(vector, tam);
 
 
     /*
@@ -48,6 +45,7 @@ int main()
 void mostrarVector(int vector[], int tam)
 {
     int i;
+
     for(i=0; i<tam; i++)
     {
         printf("%d\n", vector[i]);
@@ -66,9 +64,13 @@ void cargarVector(int vector[], int tam)
 
 void ordenarVector(int vector[], int tam)
 {
-    for(i=0; i<TAM-1; i++)
+    int i;
+    int j;
+    int aux;
+
+    for(i=0; i<tam-1; i++)
     {
-        for(j=i+1; j<TAM; j++)
+        for(j=i+1; j<tam; j++)
         {
             if(vector[i]< vector[j]) //Criterio de ordenamiento
             {
@@ -78,6 +80,7 @@ void ordenarVector(int vector[], int tam)
             }
         }
     }
+
 }
 
 int buscarMaximo(int vector[], int tam)

@@ -44,23 +44,21 @@ int main()
         }
         else
         {
-            if(A[i]%2==0)
+            if(vectorA[i]%2==0)
             {
-                C[i]=A[i];
+                C[i]=vectorA[i];
             }
             else
             {
-                C[i]=B[i];
+                C[i]=vectorB[i];
             }
         }
     }
 
     for(i=0; i<5; i++)
     {
-        if
-        {
-            printf("\nPosicion: %d", i);
-        }
+        printf("\nPosicion: %d", i);
+
     }
     return 0;
 }
