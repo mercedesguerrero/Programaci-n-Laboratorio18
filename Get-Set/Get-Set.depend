@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1527627689 source:c:\test\mercedes guerrero\get-set\dato.c
+	<stdio.h>
+	"Dato.h"
+
+1527627596 c:\test\mercedes guerrero\get-set\dato.h
+
+1527629156 source:c:\test\mercedes guerrero\get-set\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Dato.h"
+

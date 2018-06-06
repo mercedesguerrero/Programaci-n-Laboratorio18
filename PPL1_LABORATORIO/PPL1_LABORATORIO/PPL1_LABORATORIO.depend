@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1527011391 source:c:\users\maguerrero_mecon\documents\ppl1_laboratorio\ppl1_laboratorio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Propietario.h"
+
+1527012347 c:\users\maguerrero_mecon\documents\ppl1_laboratorio\ppl1_laboratorio\propietario.h
+
+1527012348 source:c:\users\maguerrero_mecon\documents\ppl1_laboratorio\ppl1_laboratorio\propietario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Propietario.h"
+
+1527017453 source:c:\test\mercedes guerrero\ppl1_laboratorio\ppl1_laboratorio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Propietario.h"
+
+1527017453 c:\test\mercedes guerrero\ppl1_laboratorio\ppl1_laboratorio\propietario.h
+

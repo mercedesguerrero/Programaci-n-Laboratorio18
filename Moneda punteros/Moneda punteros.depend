@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1526684089 source:c:\test\mercedes guerrero\moneda punteros\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1526684089 source:c:\test\mercedes guerrero\moneda punteros\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1526684089 c:\test\mercedes guerrero\moneda punteros\funciones.h
+
+1526684089 source:e:\moneda punteros\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+
+1526684371 e:\moneda punteros\funciones.h
+
+1526684089 source:e:\moneda punteros\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+

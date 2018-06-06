@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1524862138 source:c:\test\mercedes guerrero\gerflix 2.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Serie.h"
+	"Usuario.h"
+
+1524862949 c:\test\mercedes guerrero\gerflix 2.0\serie.h
+
+1524861826 c:\test\mercedes guerrero\gerflix 2.0\usuario.h
+
+1524862138 source:c:\test\mercedes guerrero\gerflix 2.0\serie.c
+	"Serie.h"
+	<string.h>
+
+1524861734 source:c:\test\mercedes guerrero\gerflix 2.0\usuario.c
+	"Usuario.h"
+
+1524861734 source:c:\test\mercedes guerrero\gerflix 2.0\usuario_serie.c
+	"Usuario.h"
+	"Serie.h"
+	"Usuario_Serie.h"
+	<string.h>
+
+1524861734 c:\test\mercedes guerrero\gerflix 2.0\usuario_serie.h
+
