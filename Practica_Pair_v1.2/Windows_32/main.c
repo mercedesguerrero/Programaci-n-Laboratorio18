@@ -20,16 +20,13 @@ int main()
 
     empleados= al_newArrayList(); //constructor da espacio en memoria para el array list
 
-    int index;
-
     FILE* pFile;
 
-    pfile= fopen(data,"r");
+    pFile= fopen("data.csv","r");
 
     /*HARDCODEO DE DATOS
 
     Employee* e; //={1, "Juan", "Gomez", 1};
-    Employee* aux;
 
     e= (Employee*)malloc(sizeof(Employee));
     e->id=5;
@@ -53,22 +50,16 @@ int main()
 
     if(pFile== NULL)
     {
-        printf("No se encontró el archivo\n")
+        printf("No se encontro el archivo\n");
     }
 
-    else
-    {
-        index= parserEmployee(pFile, empleados, al_len(empleados));
-    }
+    parserEmployee(pFile, empleados, al_len(empleados));
 
-    printf("Hay %d elementos: \n", al_len(empleados));
+    printf("Hay %d elementos \n", al_len(empleados));
+    employee_print_all(empleados);
 
-    for(i=0; i<al_len(empleados); i++)
-    {
-        aux= (Employee*)al_get(empleados, i); //hacer una funcion
-        printf("%d----%s\n", aux->id, aux->name); //hacer una funcion
-    }
 
+    fclose(pFile);
 
     return 0;
 }

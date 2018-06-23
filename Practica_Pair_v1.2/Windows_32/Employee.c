@@ -41,9 +41,27 @@ int employee_compareByID(void* pEmployeeA,void* pEmployeeB)
 
 void employee_print(Employee* this)
 {
-
+    printf("\n%d\t %s\t       %s", this->id, this->name, this->lastName);
 }
 
+void employee_print_all(ArrayList* pArrayListEmployee)
+{
+  Employee* aux;
+  int len;
+  int i;
+  len= al_len(pArrayListEmployee);
+
+  for(i=0; i<len; i++)
+  {
+    if(i% 50== 0)
+    {
+        printf("\n");
+        system("pause");
+    }
+    aux= (Employee*)al_get(pArrayListEmployee, i);
+    employee_print(aux);
+  }
+}
 
 Employee* employee_new(void)
 {

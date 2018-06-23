@@ -4,35 +4,51 @@
 #include "Employee.h"
 
 
-int parserEmployee(FILE* pFile , empleados, len)
+int parserEmployee(FILE* pFile , ArrayList* pArrayListEmployee, int len)
 {
+    Employee* aux_empleado;
+
     int i=0;
-    int r;
-    int retorno= -1;
+    int read;
+    int retorno= 0;
     char aux_id[50];
     char aux_name[50];
     char aux_last_name[50];
     char aux_status[50];
 
     do{
-        r= fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", aux_id, aux_name, aux_last_name, aux_status);
+        aux_empleado= (Employee*) malloc(sizeof(Employee));
 
-        if (r==4)
+        read= fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", aux_id, aux_name, aux_last_name, aux_status);
+
+        if (read==4)
         {
-            empleados[i].id= atoi(aux_id);
-            strncpy(empleados[i].name, aux_name, sizeof(empleados[i].name));
-            strncpy(empleados[i].lastName, aux_last_name, sizeof(empleados[i].lastName));
-            empleados[i].isEmpty= atoi(aux_status);
+            aux_empleado[i].id= atoi(aux_id);
+            strncpy(aux_empleado[i].name, aux_name, sizeof(aux_empleado[i].name));
+            strncpy(aux_empleado[i].lastName, aux_last_name, sizeof(aux_empleado[i].lastName));
 
-            retorno= i;
+            if(strcmp(aux_status,"true")==0)
+            {
+                aux_empleado[i].isEmpty= 1;
+            }
+            else if(strcmp(aux_status,"false")==0)
+            {
+                aux_empleado[i].isEmpty= 0;
+            }
+
+            al_add(pArrayListEmployee, (aux_empleado));
+
+            i++;
+
+            retorno= 0;
         }
         else
         {
-            retorno= -2;
+            retorno= -1;
             break;
         }
 
-    }while(!feof(pFile)&& i< len);
+    }while(!feof(pFile) && i< len);
 
     return retorno;
 }

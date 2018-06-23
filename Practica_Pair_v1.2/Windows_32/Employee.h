@@ -31,6 +31,7 @@ struct
 int employee_compareByName(void* pEmployeeA,void* pEmployeeB); //recibe 2 empleados, los castea, y desp strcmp
 int employee_compareByID(void* pEmployeeA,void* pEmployeeB);
 void employee_print(Employee* this); //constructor a implemnentar
+void employee_print_all(ArrayList* pArrayListEmployee);
 Employee* employee_new(void);
 void employee_delete(Employee* this);
 int employee_setId(Employee* this, int id);
