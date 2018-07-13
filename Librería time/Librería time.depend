@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1531444579 source:c:\users\mechu\desktop\programacion y laboratorio 2018\librería time\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
