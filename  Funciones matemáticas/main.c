@@ -23,10 +23,10 @@ void funcion_matematica()
 
     //resultado= ceil(numeroIngresado);//REDONDEA AL PROXIMO ENTERO MAS CERCANO
     //resultado= fabs(numeroIngresado);//DEVUELVE EL VALOR ABSOLUTO DEL NUMERO
-    //resultado= floor(numeroIngresado);//REDONDEA PARA ABAJO
-    resultado= sqrt(numeroIngresado);//DEVUELVE LA RAIZ CUADRADA DEL NUMERO
+    resultado= floor(numeroIngresado);//REDONDEA PARA ABAJO
+    //resultado= sqrt(numeroIngresado);//DEVUELVE LA RAIZ CUADRADA DEL NUMERO
 
-    printf("\nEl numero es: %.2f\n", resultado);
+    printf("\nEl numero es: %f\n", resultado);
 
     printf("\nIngrese dos numeros: ");
     scanf("%d %d", &numeroIngresadoA, &numeroIngresadoB);
