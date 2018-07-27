@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1532663424 source:c:\users\mechu\desktop\programacion y laboratorio 2018\archivo de texto\main.c
+	<stdio.h>
+	<stdlib.h>
+

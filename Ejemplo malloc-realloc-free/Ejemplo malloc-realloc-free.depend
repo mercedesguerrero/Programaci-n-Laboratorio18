@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1532400333 source:c:\users\mechu\desktop\programacion y laboratorio 2018\ejemplo malloc-realloc-free\main.c
+	<stdio.h>
+	<stdlib.h>
+

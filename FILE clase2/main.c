@@ -9,9 +9,9 @@ int main()
 
     miArchivo= fopen("prueba1.txt", "w"); //wb write binary w= write
 
-    //fwrite(&numero, sizeof(int),1, miArchivo);// una manera
+    fwrite(&numero, sizeof(int),1, miArchivo);// una manera
 
-    fread(&numero, sizeof(int),1, miArchivo);
+    //fread(&numero, sizeof(int),1, miArchivo);
 
     fclose(miArchivo);
 

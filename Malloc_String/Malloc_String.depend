@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1532397348 source:c:\users\mechu\desktop\programacion y laboratorio 2018\malloc_string\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
