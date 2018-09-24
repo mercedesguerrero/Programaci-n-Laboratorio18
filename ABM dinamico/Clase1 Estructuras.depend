@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1537388825 source:c:\test\mercedes\clase1 estructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Empleado.h"
+
+1537388825 c:\test\mercedes\clase1 estructuras\empleado.h
+
+1537389293 source:c:\test\mercedes\clase1 estructuras\empleado.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Empleado.h"
+
+1537744052 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm dinamico\empleado.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Empleado.h"
+
+1537757051 c:\users\mechu\desktop\programacion y laboratorio 2018\abm dinamico\empleado.h
+
+1537396973 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm dinamico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Empleado.h"
+
