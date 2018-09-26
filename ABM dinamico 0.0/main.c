@@ -1,33 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
 
 #include "Empleado.h"
 #define CANTIDAD 10
-#define CANT_SECTORES 5
 
 /**< TAREA: UNA FUNCION QUE ABRA UN ARCHIVO Y GUARDE Y CUANDO SE ABRE EL PROGRAMA QUE LEA DE UN ARCHIVO Y LO CARGUE EN EL ARRAY
         INFORMES:
         - MOSTRAR EL EMPLEADO QUE MAS GANA Y MENOS GANA
         - MOSTRAR TODOS LOS HOMBRES
+        ORDENAR ARRAY
  */
 
 int main()
 {
     char seguir= 's';
     eEmpleado *lista= (eEmpleado*)malloc(sizeof(eEmpleado)*10);
-    eSector listaSector[CANT_SECTORES];
 
     if(lista==NULL)
     {
         exit(1);
     }
 
-    hardcodearSectores(listaSector, CANT_SECTORES);
-    //eSector sectores[]= {{1, "Ventas"}, {2, "Compras"}, {3, "RRHH"}, {4, "Contable"}, {5, "Sistemas"}};
     inicializarEmpleados(lista, CANTIDAD);
-    hardcodearEmpleados(lista);
+
+    eSector sectores[]= {{1, "Ventas"}, {2, "Compras"}, {3, "RRHH"}};
 
     /**<  COMO COMPROBAR SI BUSCAR EMPLEADO FUNCIONA OK
 
@@ -47,7 +44,7 @@ int main()
         switch(menu())
         {
             case 1:
-                agregarEmpleado(lista, listaSector, CANTIDAD, CANT_SECTORES);
+                agregarEmpleado(lista, CANTIDAD);
 
                 presionarContinuar();
                 break;
@@ -62,32 +59,11 @@ int main()
                 presionarContinuar();
                 break;
             case 4:
-                ordenarEmpleadosPorNombre(lista, CANTIDAD);
                 mostrarEmpleados(lista, CANTIDAD);
 
                 presionarContinuar();
                 break;
             case 5:
-                mostrarEmpleados(lista, CANTIDAD);
-
-                presionarContinuar();
-                break;
-            case 6:
-                listar_x_sector(lista, listaSector, CANTIDAD, CANT_SECTORES);
-
-                presionarContinuar();
-                break;
-            case 7:
-
-
-                presionarContinuar();
-                break;
-            case 8:
-
-
-                presionarContinuar();
-                break;
-            case 9:
                 seguir= 'n';
                 break;
         }

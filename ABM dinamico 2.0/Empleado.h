@@ -31,16 +31,11 @@ int menu();
 void presionarContinuar();
 
 void inicializarEmpleados(eEmpleado *listaEmpleados, int tam);
-void hardcodearEmpleados(eEmpleado *listaEmpleados);
-void hardcodearSectores(eSector *listaSectores, int tamSector);
 int buscarLibre(eEmpleado *listaEmpleados, int tam);
 
 int buscarEmpleado(eEmpleado *listaEmpleados, int tam, int legajo);
 
-void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam, int tamSector);
-
-void mostrarSectores(eSector listaSectores[], int tamSector);
-void listar_x_sector(eEmpleado *listaEmpleados, eSector *listaSectores, int tam, int tamSector);
+void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam);
 
 void id_to_sector(int id, char sector[]);
 

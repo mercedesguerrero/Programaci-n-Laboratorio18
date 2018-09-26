@@ -18,10 +18,7 @@ int menu()
     printf("\n 3- Modificar");
     printf("\n 4- Ordenar");
     printf("\n 5- Listar");
-    printf("\n 6- Listar empleados por sector");
-    printf("\n 7- Ordenar empleados por sector y por nombre");
-    printf("\n 8- Mostrar los datos de los empleados que mas ganan por sector");
-    printf("\n 9- Salir\n");
+    printf("\n 6- Salir\n");
 
     printf("\nIngrese opcion: ");
     fflush(stdin);
@@ -41,44 +38,6 @@ void inicializarEmpleados(eEmpleado *listaEmpleados, int tam)
     for(int i=0; i<tam; i++)
     {
         (listaEmpleados+i)->isEmpty= LIBRE;
-    }
-}
-
-void hardcodearSectores(eSector *listaSectores, int tamSector)
-{
-    eSector aux[]=
-    {
-        {1, "Ventas"},
-        {2, "Compras"},
-        {3, "RRHH"},
-        {4, "Contable"},
-        {5, "Sistemas"}
-    };
-
-    for(int i=0; i<tamSector; i++)
-    {
-        *(listaSectores +i) = *(aux +i);
-    }
-}
-
-void hardcodearEmpleados(eEmpleado *listaEmpleados)
-{
-    eEmpleado aux[]=
-    {
-        {1111, "Juan", 'm', 1000, OCUPADO, 1},
-        {2222, "Mer", 'f', 2500, OCUPADO, 2},
-        {3333, "Matias", 'm', 3000, OCUPADO, 3},
-        {4444, "Luis", 'm', 3500, OCUPADO, 4},
-        {5555, "Juana", 'f', 2000, OCUPADO, 5},
-        {7777, "Mariela", 'f', 1800, OCUPADO, 2},
-        {8888, "Carlos", 'm', 1900, OCUPADO, 3},
-        {9999, "Andrea", 'f', 2500, OCUPADO, 2},
-        {1000, "Leandro", 'm', 1000, OCUPADO, 1}
-    };
-
-    for(int i=0; i<9; i++)
-    {
-        *(listaEmpleados +i) = *(aux +i);
     }
 }
 
@@ -114,7 +73,7 @@ int buscarEmpleado(eEmpleado *listaEmpleados, int tam, int legajo)
     return indice;
 }
 
-void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam, int tamSector)
+void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam)
 {
     eEmpleado nuevoEmpleado;
     int indice;
@@ -151,8 +110,7 @@ void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam
             printf("\nIngrese sueldo: ");
             scanf("%f", &nuevoEmpleado.sueldo);
             nuevoEmpleado.isEmpty= OCUPADO;
-            mostrarSectores(listaSectores, tamSector);
-            printf("\n\nIngrese id de sector: ");
+            printf("\n%d: %s\t%d: %s\t%d: %s \n\nIngrese id de sector: ", listaSectores[0].id, listaSectores[0].descripcion, listaSectores[1].id, listaSectores[1].descripcion, listaSectores[2].id, listaSectores[2].descripcion);
             scanf("%d", &nuevoEmpleado.idSector);
 
             *(listaEmpleados + indice)= nuevoEmpleado;
@@ -160,15 +118,7 @@ void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam
     }
 }
 
-void mostrarSectores(eSector listaSectores[], int tamSector)
-{
-    for(int i=0; i<tamSector; i++)
-    {
-        printf("\n%d: %s\t", listaSectores[i].id, listaSectores[i].descripcion);
-    }
-}
-
-void id_to_sector(int id, char sector[]) /**< o hacer la funcion cargarDescripcion si id de eSector == idSector strcpy PASAR EL ARRAY DE SECTORES Y EL TAMAÑO*/
+void id_to_sector(int id, char sector[])
 {
     switch(id)
     {
@@ -180,12 +130,6 @@ void id_to_sector(int id, char sector[]) /**< o hacer la funcion cargarDescripci
             break;
         case 3:
             strcpy(sector, "RRHH");
-            break;
-        case 4:
-            strcpy(sector, "CONTABLE");
-            break;
-        case 5:
-            strcpy(sector, "SISTEMAS");
             break;
     }
 }
@@ -220,37 +164,6 @@ void mostrarEmpleados(eEmpleado *listaEmpleados, int tam)
         {
             printEmpleadoPorReferencia(listaEmpleados + i);
         }
-    }
-}
-
-void listar_x_sector(eEmpleado *listaEmpleados, eSector *listaSectores, int tam, int tamSector)
-{
-    int idSector;
-    int flag= 0;
-    char descripcion[20];
-
-    mostrarSectores(listaSectores, tamSector);
-    printf("\n\nIngrese id de sector: ");
-    scanf("%d", &idSector);
-
-    system("cls");
-
-    id_to_sector(idSector, descripcion);
-    printf("Empleados del sector: %s\n\n", descripcion);
-
-    for(int i=0; i<tam; i++)
-    {
-        if((listaEmpleados+ i)->isEmpty == OCUPADO && (listaEmpleados+i)->idSector == idSector)
-        {
-            printEmpleadoPorReferencia(listaEmpleados+i);
-            flag=1;
-        }
-    }
-
-
-    if(flag== 0)
-    {
-        printf("\nNo hay empleados para mostrar\n");
     }
 }
 
@@ -328,46 +241,36 @@ void modificarEmpleado(eEmpleado *listaEmpleados, int tam)
     }
 }
 
-void ordenar_xSector_xNombre(eEmpleado *listaEmpleados, int tam)
+void ordenarEmpleadosPorNombre(eEmpleado *listaEmpleados, int tam)
 {
     eEmpleado auxEmpleado;
     int i;
     int j;
-    char descipcionI[20];
-    char descripcionJ[20];
 
     for(i=0; i<tam-1; i++)
     {
         for(j=i+1; j<tam; j++)
         {
-
-
-            if(strcmp(descipcionI, descripcionJ) >0)
+            if(strcmp(*(listaEmpleados + i)->nombre, *(listaEmpleados + j)->nombre)>0)
             {
                 auxEmpleado = *(listaEmpleados + i);
-                *(listaEmpleados + i) = (listaEmpleados + j);
-                *(listaEmpleados + j) = auxEmpleado;
-            }
-            else if(strcmp(descipcionI, descripcionJ)== 0 && strcmp((listaEmpleados+i)->nombre, (listaEmpleados+j)->nombre)> 0)
-            {
-                auxEmpleado = *(listaEmpleados + i);
-                *(listaEmpleados + i) = (listaEmpleados + j);
+                *(listaEmpleados + i) = *(listaEmpleados + j);
                 *(listaEmpleados + j) = auxEmpleado;
             }
         }
     }
-    printf("\nSe ordenaron los empleados con exito\n");
-}
-
-void mostrarEmpleadosQueMasGanan(eSector listaSector, int tamSector)
-{
-    float maxSueldo;
-    int flag;
 }
 
 /*
-O HACER UNA FUNCION GENERICA QUE COMPARE:
-----------------------------
+eEmpleado *auxEmpleado;
+
+
+y despues ahi simplemente apuntar...
+
+auxEmpleado = (listaEmpleados + i);
+(listaEmpleados + i) = (listaEmpleados + j);
+(listaEmpleados + j) = auxEmpleado;
+-------------------------------------
 
   if(strcmp(*(listaEmpleados + i)->nombre, *(listaEmpleados + j)->nombre)>0)
             {
@@ -376,5 +279,6 @@ O HACER UNA FUNCION GENERICA QUE COMPARE:
                 *(listaEmpleados + j) = auxEmpleado;
 
 */
+
 
 

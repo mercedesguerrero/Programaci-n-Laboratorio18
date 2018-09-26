@@ -41,17 +41,3 @@
 	<string.h>
 	"Empleado.h"
 
-1537827408 source:c:\test\mercedes\abm dinamico\main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Empleado.h"
-
-1537823436 c:\test\mercedes\abm dinamico\empleado.h
-
-1537823399 source:c:\test\mercedes\abm dinamico\empleado.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"Empleado.h"
-
