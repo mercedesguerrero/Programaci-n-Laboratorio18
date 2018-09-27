@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1537999014 source:c:\test\mercedes\abm empleado arraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arraylist.h"
+
+1537999014 c:\test\mercedes\abm empleado arraylist\arraylist.h
+
+1538000673 source:c:\test\mercedes\abm empleado arraylist\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Arraylist.h"
+	"Funciones.h"
+
+1538000772 c:\test\mercedes\abm empleado arraylist\funciones.h
+
+1538000702 source:c:\test\mercedes\abm empleado arraylist\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Arraylist.h"
+	"Funciones.h"
+
+1538066554 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arraylist.h"
+
+1537999014 c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\arraylist.h
+

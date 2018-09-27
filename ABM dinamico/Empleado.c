@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 
 #include "Empleado.h"
 
@@ -114,7 +115,79 @@ int buscarEmpleado(eEmpleado *listaEmpleados, int tam, int legajo)
     return indice;
 }
 
-void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam, int tamSector)
+int elegirSector(eSector listaSectores[], int tamSector)
+{
+    int idSector;
+    printf("\nSectores\n\n");
+
+    for(int i=0; i < tamSector; i++)
+    {
+        printf("%d %s\n", listaSectores[i].id, listaSectores[i].descripcion);
+    }
+    printf("\nSeleccione sector: ");
+    scanf("%d", &idSector);
+
+    return idSector;
+}
+
+void cargarDescripcion(eSector sectores[], int tamSector, int idSector, char cadena[])
+{
+
+    for(int i=0; i < tamSector; i++)
+    {
+        if( sectores[i].id == idSector)
+        {
+            strcpy(cadena, sectores[i].descripcion);
+            break;
+        }
+    }
+
+}
+
+void parsearEmpleados(char* path, eEmpleado* listaEmpleados, int tam)
+{
+    FILE* f;
+    eEmpleado nuevoEmpleado;
+    int cant;
+    int indice;
+    char buffer[6][128];
+
+    f= fopen(path, "r");
+
+
+    if(f!= NULL && listaEmpleados!= NULL)
+    {
+        /**< %[^,]quiero leer todo lo que encuentres hasta la coma  */
+
+        fscanf(f,"%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5]);
+        fscanf(f,"%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5]);// hago 2 leidas fantasmas porq lee mal el archivo sino
+
+        while(!feof(f))
+        {
+            cant= fscanf(f,"%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5]);
+
+
+            if(cant ==6)
+            {
+
+                nuevoEmpleado.legajo= atoi(buffer[0]);
+                strcpy(nuevoEmpleado.nombre, buffer[1]);
+                nuevoEmpleado.sexo= buffer[2][0];
+                nuevoEmpleado.sueldo= atof(buffer[3]);
+                nuevoEmpleado.isEmpty= atoi(buffer[4]);
+                nuevoEmpleado.idSector= atoi(buffer[5]);
+
+                indice= buscarLibre(listaEmpleados, tam);
+
+                *(listaEmpleados+ indice)= nuevoEmpleado;
+            }
+        }
+
+        fclose(f);
+    }
+}
+
+void agregarEmpleado(eEmpleado *listaEmpleados, int tam, eSector listaSectores[], int tamSector)
 {
     eEmpleado nuevoEmpleado;
     int indice;
@@ -137,7 +210,7 @@ void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam
         if(esta != -1)
         {
             printf("\nYa existe un empleado con el legajo %d\n", legajo);
-            printEmpleado(*(listaEmpleados + esta));
+            printEmpleado(*(listaEmpleados + esta), listaSectores, tamSector);
         }
         else
         {
@@ -151,74 +224,62 @@ void agregarEmpleado(eEmpleado *listaEmpleados, eSector listaSectores[], int tam
             printf("\nIngrese sueldo: ");
             scanf("%f", &nuevoEmpleado.sueldo);
             nuevoEmpleado.isEmpty= OCUPADO;
-            mostrarSectores(listaSectores, tamSector);
-            printf("\n\nIngrese id de sector: ");
-            scanf("%d", &nuevoEmpleado.idSector);
+            nuevoEmpleado.idSector = elegirSector(listaSectores, tamSector);
 
             *(listaEmpleados + indice)= nuevoEmpleado;
         }
     }
 }
 
-void mostrarSectores(eSector listaSectores[], int tamSector)
+void guardarEmpleados(char* path, eEmpleado* listaEmpleados, int tam)
 {
-    for(int i=0; i<tamSector; i++)
+    FILE* f;
+
+    f= fopen(path, "w");
+
+    if(f != NULL)
     {
-        printf("\n%d: %s\t", listaSectores[i].id, listaSectores[i].descripcion);
+        fprintf(f, "legajo,nombre,genero,sueldo,isEmpty,id Sector\n");
+
+        for(int i=0; i<tam; i++)
+        {
+            fprintf(f, "%d, %s, %c, %.2f, %d, %d\n", (listaEmpleados + i)->legajo, (listaEmpleados + i)->nombre, (listaEmpleados + i)->sexo,
+                    (listaEmpleados + i)->sueldo, (listaEmpleados + i)->isEmpty, (listaEmpleados + i)->idSector);
+        }
+
+        fclose(f);
     }
 }
 
-void id_to_sector(int id, char sector[]) /**< o hacer la funcion cargarDescripcion si id de eSector == idSector strcpy PASAR EL ARRAY DE SECTORES Y EL TAMAÑO*/
-{
-    switch(id)
-    {
-        case 1:
-            strcpy(sector,"VENTAS");
-            break;
-        case 2:
-            strcpy(sector,"COMPRAS");
-            break;
-        case 3:
-            strcpy(sector, "RRHH");
-            break;
-        case 4:
-            strcpy(sector, "CONTABLE");
-            break;
-        case 5:
-            strcpy(sector, "SISTEMAS");
-            break;
-    }
-}
-
-void printEmpleado(eEmpleado unEmpleado)
+void printEmpleado(eEmpleado unEmpleado, eSector listaSectores[], int tamSector)
 {
     char sectorDescripcion[10];
 
-    id_to_sector(unEmpleado.idSector, sectorDescripcion);
+    cargarDescripcion(listaSectores, tamSector, unEmpleado.idSector, sectorDescripcion);
 
-    printf("\t%d\t%s\t%c\t%.2f\t%s\n", unEmpleado.legajo, unEmpleado.nombre, unEmpleado.sexo, unEmpleado.sueldo, sectorDescripcion);
+    printf("\t%d\t%20s\t%c\t%8.2f\t%s\n", unEmpleado.legajo, unEmpleado.nombre, unEmpleado.sexo, unEmpleado.sueldo, sectorDescripcion);
 
 }
 
-void printEmpleadoPorReferencia(eEmpleado *unEmpleado)
+void printEmpleadoPorReferencia(eEmpleado *unEmpleado, eSector listaSectores[], int tamSector)
 {
     char sectorDescripcion[10];
 
-    id_to_sector(unEmpleado->idSector, sectorDescripcion);
+    cargarDescripcion(listaSectores, tamSector, unEmpleado->idSector, sectorDescripcion);
 
-    printf("\t%d\t%s\t%c\t%.2f\t%s\n", unEmpleado->legajo, unEmpleado->nombre, unEmpleado->sexo, unEmpleado->sueldo, sectorDescripcion);
+    printf("\t%d\t%20s\t%c\t%8.2f\t%s\n", unEmpleado->legajo, unEmpleado->nombre, unEmpleado->sexo, unEmpleado->sueldo, sectorDescripcion);
 
 }
 
-void mostrarEmpleados(eEmpleado *listaEmpleados, int tam)
+void mostrarEmpleados(eEmpleado *listaEmpleados, int tam, eSector listaSectores[], int tamSector)
 {
     printf("\n\n");
-    printf("\tID\tNombre \tGenero\tSueldo\tSector\n\n");
+    printf("\tID\t             Nombre \tGenero\t  Sueldo\tSector\n\n");
     for(int i=0; i<tam; i++)
     {
-        if((listaEmpleados + i)->isEmpty == 1)
+        if((listaEmpleados + i)->isEmpty == OCUPADO)
         {
-            printEmpleadoPorReferencia(listaEmpleados + i);
+            printEmpleadoPorReferencia((listaEmpleados + i), listaSectores, tamSector);
         }
     }
 }
@@ -229,20 +290,18 @@ void listar_x_sector(eEmpleado *listaEmpleados, eSector *listaSectores, int tam,
     int flag= 0;
     char descripcion[20];
 
-    mostrarSectores(listaSectores, tamSector);
-    printf("\n\nIngrese id de sector: ");
-    scanf("%d", &idSector);
+    idSector = elegirSector(listaSectores, tamSector);
+    cargarDescripcion(listaSectores, tam, idSector, descripcion);
 
     system("cls");
 
-    id_to_sector(idSector, descripcion);
     printf("Empleados del sector: %s\n\n", descripcion);
 
     for(int i=0; i<tam; i++)
     {
         if((listaEmpleados+ i)->isEmpty == OCUPADO && (listaEmpleados+i)->idSector == idSector)
         {
-            printEmpleadoPorReferencia(listaEmpleados+i);
+            printEmpleadoPorReferencia((listaEmpleados+i), listaSectores, tamSector);
             flag=1;
         }
     }
@@ -254,7 +313,7 @@ void listar_x_sector(eEmpleado *listaEmpleados, eSector *listaSectores, int tam,
     }
 }
 
-void eliminarEmpleado(eEmpleado *listaEmpleados, int tam)
+void eliminarEmpleado(eEmpleado *listaEmpleados, int tam, eSector listaSectores[], int tamSector)
 {
     int legajo;
     int indice;
@@ -271,7 +330,7 @@ void eliminarEmpleado(eEmpleado *listaEmpleados, int tam)
     }
     else
     {
-        printEmpleadoPorReferencia(listaEmpleados + indice);
+        printEmpleadoPorReferencia((listaEmpleados + indice), listaSectores, tamSector);
 
         printf("\nConfirma borrado? s/n ");
         fflush(stdin);
@@ -289,7 +348,7 @@ void eliminarEmpleado(eEmpleado *listaEmpleados, int tam)
     }
 }
 
-void modificarEmpleado(eEmpleado *listaEmpleados, int tam)
+void modificarEmpleado(eEmpleado *listaEmpleados, int tam, eSector listaSectores[], int tamSector)
 {
     int legajo;
     int indice;
@@ -307,7 +366,7 @@ void modificarEmpleado(eEmpleado *listaEmpleados, int tam)
     }
     else
     {
-        printEmpleadoPorReferencia(listaEmpleados + indice);
+        printEmpleadoPorReferencia((listaEmpleados + indice), listaSectores, tamSector);
 
         printf("\nModifica sueldo? s/n ");
         fflush(stdin);
@@ -328,6 +387,8 @@ void modificarEmpleado(eEmpleado *listaEmpleados, int tam)
     }
 }
 
+
+/*
 void ordenar_xSector_xNombre(eEmpleado *listaEmpleados, int tam)
 {
     eEmpleado auxEmpleado;
@@ -340,8 +401,6 @@ void ordenar_xSector_xNombre(eEmpleado *listaEmpleados, int tam)
     {
         for(j=i+1; j<tam; j++)
         {
-
-
             if(strcmp(descipcionI, descripcionJ) >0)
             {
                 auxEmpleado = *(listaEmpleados + i);
@@ -364,6 +423,9 @@ void mostrarEmpleadosQueMasGanan(eSector listaSector, int tamSector)
     float maxSueldo;
     int flag;
 }
+
+*/
+
 
 /*
 O HACER UNA FUNCION GENERICA QUE COMPARE:

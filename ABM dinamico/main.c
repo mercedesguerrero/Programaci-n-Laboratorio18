@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
 
 #include "Empleado.h"
-#define CANTIDAD 10
+#define CANTIDAD 40
 #define CANT_SECTORES 5
 
 /**< TAREA: UNA FUNCION QUE ABRA UN ARCHIVO Y GUARDE Y CUANDO SE ABRE EL PROGRAMA QUE LEA DE UN ARCHIVO Y LO CARGUE EN EL ARRAY
         INFORMES:
         - MOSTRAR EL EMPLEADO QUE MAS GANA Y MENOS GANA
         - MOSTRAR TODOS LOS HOMBRES
+        ORDENAR ARRAY
  */
 
 int main()
 {
     char seguir= 's';
-    eEmpleado *lista= (eEmpleado*)malloc(sizeof(eEmpleado)*10);
+    eEmpleado* lista= (eEmpleado*)malloc(sizeof(eEmpleado)*CANTIDAD);
     eSector listaSector[CANT_SECTORES];
 
     if(lista==NULL)
@@ -27,7 +27,8 @@ int main()
     hardcodearSectores(listaSector, CANT_SECTORES);
     //eSector sectores[]= {{1, "Ventas"}, {2, "Compras"}, {3, "RRHH"}, {4, "Contable"}, {5, "Sistemas"}};
     inicializarEmpleados(lista, CANTIDAD);
-    hardcodearEmpleados(lista);
+    //hardcodearEmpleados(lista);
+    parsearEmpleados("MOCK_DATA.csv", lista, CANTIDAD);
 
     /**<  COMO COMPROBAR SI BUSCAR EMPLEADO FUNCIONA OK
 
@@ -47,28 +48,28 @@ int main()
         switch(menu())
         {
             case 1:
-                agregarEmpleado(lista, listaSector, CANTIDAD, CANT_SECTORES);
+                agregarEmpleado(lista, CANTIDAD, listaSector, CANT_SECTORES);
 
                 presionarContinuar();
                 break;
             case 2:
-                eliminarEmpleado(lista, CANTIDAD);
+                eliminarEmpleado(lista, CANTIDAD, listaSector, CANT_SECTORES);
 
                 presionarContinuar();
                 break;
             case 3:
-                modificarEmpleado(lista, CANTIDAD);
+                modificarEmpleado(lista, CANTIDAD, listaSector, CANT_SECTORES);
 
                 presionarContinuar();
                 break;
             case 4:
-                ordenarEmpleadosPorNombre(lista, CANTIDAD);
-                mostrarEmpleados(lista, CANTIDAD);
+                //ordenarEmpleadosPorNombre(lista, CANTIDAD);
+                mostrarEmpleados(lista, CANTIDAD, listaSector, CANT_SECTORES);
 
                 presionarContinuar();
                 break;
             case 5:
-                mostrarEmpleados(lista, CANTIDAD);
+                mostrarEmpleados(lista, CANTIDAD, listaSector, CANT_SECTORES);
 
                 presionarContinuar();
                 break;
@@ -89,6 +90,7 @@ int main()
                 break;
             case 9:
                 seguir= 'n';
+                guardarEmpleados("MOCK_DATA.csv", lista, CANTIDAD);
                 break;
         }
 
