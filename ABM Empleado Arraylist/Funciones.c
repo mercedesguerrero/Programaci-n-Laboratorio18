@@ -488,16 +488,16 @@ void mostrarEmpleadosMasGanadores(ArrayList* listaEmpleados, eSector* sectores, 
     int flag;
     eEmpleado* unEmpleado;
 
-    for(i=0; i<tamSector; i++)
+    for(i=0; i<tamSector; i++)//recorre sectores
     {
-        cargarDescripcion(sectores, tamSector, sectores[i].id, descripcion);
+        cargarDescripcion(sectores, tamSector, (sectores + i)->id, descripcion);
         printf(">>Sector %s\n", descripcion);
         flag = 0;
 
         for(j=0; j< listaEmpleados->len(listaEmpleados); j++)//busca el sueldo mas alto
         {
             unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, j);
-            if((unEmpleado->sueldo > maxSueldo && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id) || (flag == 0 && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id));
+            if((unEmpleado->sueldo > maxSueldo && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id) || ((flag == 0 && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id)));
             {
                 maxSueldo = unEmpleado->sueldo;
                 flag = 1;
@@ -509,7 +509,8 @@ void mostrarEmpleadosMasGanadores(ArrayList* listaEmpleados, eSector* sectores, 
             unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, k);
             if(unEmpleado->sueldo == maxSueldo && unEmpleado->idSector == (sectores + i)->id && unEmpleado->isEmpty== OCUPADO)
             {
-               printEmpleadoPorReferencia(unEmpleado, sectores, tamSector);
+                printf("\n");
+                printEmpleadoPorReferencia(unEmpleado, sectores, tamSector);
             }
         }
         printf("\n\n");
@@ -529,7 +530,6 @@ void filtrarEmpleadosSistemas(ArrayList* listaEmpleados, eSector* sectores, int 
             if(unEmpleado->idSector == 5) //SISTEMAS
             {
                 lista2->add(lista2, unEmpleado);
-                printEmpleadoPorReferencia(listaEmpleados, sectores, tamSector);
             }
         }
 
