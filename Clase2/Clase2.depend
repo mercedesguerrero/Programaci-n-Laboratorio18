@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1537310289 source:c:\test\mercedes\clase2\main.c
+	<stdlib.h>
+	<stdio.h>
+	"Alumno.h"
+
+1537310230 c:\test\mercedes\clase2\alumno.h
+
+1537310414 source:c:\test\mercedes\clase2\alumno.c
+	<stdio.h>
+	<string.h>
+	"Alumno.h"
+
+1537381575 source:c:\users\maguerrero_mecon\desktop\programación c\clase2\alumno.c
+	<stdio.h>
+	<string.h>
+	"Alumno.h"
+
+1537310230 c:\users\maguerrero_mecon\desktop\programación c\clase2\alumno.h
+
+1537377727 source:c:\users\maguerrero_mecon\desktop\programación c\clase2\main.c
+	<stdlib.h>
+	<stdio.h>
+	"Alumno.h"
+

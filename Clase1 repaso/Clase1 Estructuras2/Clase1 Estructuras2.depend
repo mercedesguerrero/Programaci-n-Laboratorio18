@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1537221619 source:f:\clase1 repaso\clase1 estructuras2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1537224586 source:c:\test\mercedes\clase1 arrayestructura\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

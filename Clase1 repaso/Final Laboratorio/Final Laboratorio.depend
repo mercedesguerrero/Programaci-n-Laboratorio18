@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1532723492 source:c:\test\mercedes\final laboratorio\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arraylist.h"
+
+1532723081 c:\test\mercedes\final laboratorio\arraylist.h
+
+1532731268 source:c:\test\mercedes\final laboratorio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Arraylist.h"
+	"Letra.h"
+
+1532731198 c:\test\mercedes\final laboratorio\letra.h
+	"Letra.h"
+	"ArrayList.h"
+
+1532732118 source:c:\test\mercedes\final laboratorio\letra.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Arraylist.h"
+	"Letra.h"
+
