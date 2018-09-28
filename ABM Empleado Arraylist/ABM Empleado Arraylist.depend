@@ -25,11 +25,29 @@
 	"Arraylist.h"
 	"Funciones.h"
 
-1538066554 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\arraylist.c
+1538085624 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\arraylist.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Arraylist.h"
 
 1537999014 c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\arraylist.h
+
+1538154416 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Arraylist.h"
+	"Funciones.h"
+
+1538150452 c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\funciones.h
+
+1538154951 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abm empleado arraylist\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"Arraylist.h"
+	"Funciones.h"
 

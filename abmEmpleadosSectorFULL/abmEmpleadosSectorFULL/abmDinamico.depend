@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1537394808 source:c:\test\repaso 2018 clase1\abmdinamico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1537803284 source:c:\users\alumno\desktop\abmdinamico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
+1537816299 source:c:\users\capacita_mecon\desktop\abmempleadossector\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+
+1538088524 source:c:\test\abmempleadossector\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"ArrayList.h"
+
+1529716488 source:c:\test\abmempleadossector\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1529716166 c:\test\abmempleadossector\arraylist.h
+
+1538088524 source:c:\users\mechu\desktop\programacion y laboratorio 2018\abmempleadossectorfull\abmempleadossectorfull\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	"ArrayList.h"
+
+1529716166 c:\users\mechu\desktop\programacion y laboratorio 2018\abmempleadossectorfull\abmempleadossectorfull\arraylist.h
+

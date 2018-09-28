@@ -20,9 +20,10 @@ void mostrarMenu()
     printf("3- ELIMINAR EMPLEADO\n");
     printf("4- LISTAR\n");
     printf("5- LISTAR POR SECTOR\n");
-    printf("6- OREDENAR\n");
-    printf("7- CREAR ARRAYLIST CON EMPLEADOS DE SISTEMAS\n");
-    printf("8- SALIR\n");
+    printf("6- ORDENAR\n");
+    printf("7- LISTAR EMPLEADOS QUE MAS GANAN\n");
+    printf("8- CREAR LISTA DE EMPLEADOS DE SISTEMAS\n");
+    printf("9- SALIR\n");
 
     printf("\nLa opcion es: ");
 }
@@ -118,14 +119,14 @@ int buscarEmpleado(ArrayList* listaEmpleados, int legajo)
     return indice;
 }
 
-int elegirSector(eSector listaSectores[], int tamSector)
+int elegirSector(eSector* listaSectores, int tamSector)
 {
     int idSector;
-    printf("\nSectores\n\n");
+    printf("\n>>>Sectores>>>\n\n");
 
-    for(int i=0; i < tamSector; i++)
+    for(int i=0; i <tamSector; i++)
     {
-        printf("%d %s\n", listaSectores[i].id, listaSectores[i].descripcion);
+        printf("%d %s\n", (listaSectores+ i)->id, (listaSectores+ i)->descripcion);
     }
     printf("\nSeleccione sector: ");
     scanf("%d", &idSector);
@@ -133,18 +134,16 @@ int elegirSector(eSector listaSectores[], int tamSector)
     return idSector;
 }
 
-void cargarDescripcion(eSector sectores[], int tamSector, int idSector, char cadena[])
+void cargarDescripcion(eSector* sectores, int tamSector, int idSector, char* cadena)
 {
-
-    for(int i=0; i < tamSector; i++)
+    for(int i=0; i<tamSector; i++)
     {
-        if( sectores[i].id == idSector)
+        if((sectores + i)->id == idSector)
         {
-            strcpy(cadena, sectores[i].descripcion);
+            strcpy(cadena, (sectores + i)-> descripcion);
             break;
         }
     }
-
 }
 
 void parsearEmpleados(char* path, ArrayList* listaEmpleados)
@@ -155,7 +154,6 @@ void parsearEmpleados(char* path, ArrayList* listaEmpleados)
     char buffer[6][128];
 
     f= fopen(path, "r");
-
 
     if(f!= NULL && listaEmpleados!= NULL)
     {
@@ -169,7 +167,7 @@ void parsearEmpleados(char* path, ArrayList* listaEmpleados)
             cant= fscanf(f,"%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5]);
 
 
-            if(cant ==6)
+            if(cant==6)
             {
                 nuevoEmpleado= newEmpleado();//constructor
 
@@ -186,6 +184,10 @@ void parsearEmpleados(char* path, ArrayList* listaEmpleados)
 
                     listaEmpleados->add(listaEmpleados, nuevoEmpleado);
                 }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -200,39 +202,40 @@ void agregarEmpleado(ArrayList* listaEmpleados, eSector* listaSectores, int tamS
     int esta;
     int legajo;
 
+    system("cls");
+    printf("\n   *** Alta Empleado ***\n\n");
 
-        printf("\nIngrese legajo: ");
-        scanf("%d", &legajo);
+    printf("\nIngrese legajo: ");
+    scanf("%d", &legajo);
 
-        esta= buscarEmpleado(listaEmpleados, legajo);
+    esta= buscarEmpleado(listaEmpleados, legajo);
 
-        if(esta != -1)
+    if(esta != -1)
+    {
+        printf("\nYa existe un empleado con el legajo %d\n", legajo);
+        printEmpleadoPorReferencia((eEmpleado*)listaEmpleados->get(listaEmpleados, esta), listaSectores, tamSector);
+    }
+    else
+    {
+        nuevoEmpleado= newEmpleado();
+
+        if(nuevoEmpleado != NULL)
         {
+            nuevoEmpleado->legajo= legajo;
+            printf("\nIngrese nombre: ");
+            fflush(stdin);
+            gets(nuevoEmpleado->nombre);
+            printf("\nIngrese sexo: ");
+            fflush(stdin);
+            scanf("%c", &nuevoEmpleado->sexo);//????
+            printf("\nIngrese sueldo: ");
+            scanf("%f", &nuevoEmpleado->sueldo);
+            nuevoEmpleado->isEmpty= OCUPADO;
+            nuevoEmpleado->idSector = elegirSector(listaSectores, tamSector);
 
-            printf("\nYa existe un empleado con el legajo %d\n", legajo);
-            printEmpleadoPorReferencia((eEmpleado*)listaEmpleados->get(listaEmpleados, esta), listaSectores, tamSector);
+            listaEmpleados->add(listaEmpleados, nuevoEmpleado);
         }
-        else
-        {
-            nuevoEmpleado= newEmpleado();
-
-            if(nuevoEmpleado != NULL)
-            {
-                nuevoEmpleado->legajo= legajo;
-                printf("\nIngrese nombre: ");
-                fflush(stdin);
-                gets(nuevoEmpleado->nombre);
-                printf("\nIngrese sexo: ");
-                fflush(stdin);
-                scanf("%c", &nuevoEmpleado->sexo);
-                printf("\nIngrese sueldo: ");
-                scanf("%f", &nuevoEmpleado->sueldo);
-                nuevoEmpleado->isEmpty= OCUPADO;
-                nuevoEmpleado->idSector = elegirSector(listaSectores, tamSector);
-
-                listaEmpleados->add(listaEmpleados, nuevoEmpleado);
-            }
-        }
+    }
 }
 
 void guardarEmpleados(char* path, ArrayList* listaEmpleados)
@@ -244,7 +247,7 @@ void guardarEmpleados(char* path, ArrayList* listaEmpleados)
 
     if(f != NULL)
     {
-        fprintf(f, "legajo,nombre,genero,sueldo,isEmpty,id Sector\n");
+        fprintf(f, "legajo,nombre,genero,sueldo,isEmpty,idSector\n");
 
         for(int i=0; i<listaEmpleados->len(listaEmpleados); i++)
         {
@@ -264,15 +267,18 @@ void printEmpleadoPorReferencia(eEmpleado* unEmpleado, eSector* listaSectores, i
 
     cargarDescripcion(listaSectores, tamSector, unEmpleado->idSector, sectorDescripcion);
 
-    printf("\t%d\t%20s\t%c\t%8.2f\t%s\n", unEmpleado->legajo, unEmpleado->nombre, unEmpleado->sexo, unEmpleado->sueldo, sectorDescripcion);
+    printf("\t%d\t%20s\t%c\t%8.2f\t%s\n", unEmpleado->legajo, unEmpleado->nombre, unEmpleado->sexo,
+                                            unEmpleado->sueldo, sectorDescripcion);
 
 }
 
-void mostrarEmpleados(ArrayList* listaEmpleados, eSector listaSectores[], int tamSector)
+void mostrarEmpleados(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector)
 {
 
     eEmpleado* unEmpleado;
-    printf("\n\n");
+
+    system("cls");
+    printf("\n");
     printf("\tID\t             Nombre \tGenero\t  Sueldo\tSector\n\n");
     for(int i=0; i< listaEmpleados->len(listaEmpleados); i++)
     {
@@ -292,6 +298,7 @@ void eliminarEmpleado(ArrayList *listaEmpleados, eSector* listaSectores, int tam
     char respuesta;
     eEmpleado* unEmpleado;
 
+    system("cls");
     printf("\nIngrese legajo: ");
     scanf("%d", &legajo);
 
@@ -304,6 +311,7 @@ void eliminarEmpleado(ArrayList *listaEmpleados, eSector* listaSectores, int tam
     else
     {
         printf("\nSe encontro el empleado\n");
+
         unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, indice);
         printEmpleadoPorReferencia(unEmpleado, listaSectores, tamSector);
 
@@ -323,7 +331,7 @@ void eliminarEmpleado(ArrayList *listaEmpleados, eSector* listaSectores, int tam
     }
 }
 
-void modificarEmpleado(ArrayList* listaEmpleados, eSector listaSectores[], int tamSector)
+void modificarEmpleado(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector)
 {
     int legajo;
     int indice;
@@ -331,6 +339,7 @@ void modificarEmpleado(ArrayList* listaEmpleados, eSector listaSectores[], int t
     float nuevoSueldo;
     eEmpleado* unEmpleado;
 
+    system("cls");
     printf("\nIngrese legajo: ");
     scanf("%d", &legajo);
 
@@ -441,22 +450,23 @@ int compararEmpleadosGenero(void* x, void* y)
     return retorno;
 }
 
-void listar_x_sector(ArrayList *listaEmpleados, eSector *listaSectores, int tamSector)
+void listar_x_sector(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector)
 {
     int idSector;
     int flag= 0;
     char descripcion[20];
     eEmpleado* unEmpleado;
 
-    idSector = elegirSector(listaSectores, tamSector);
+    idSector= elegirSector(listaSectores, tamSector);
     cargarDescripcion(listaSectores, tamSector, idSector, descripcion);
 
     system("cls");
 
-    printf("Empleados del sector: %s\n\n", descripcion);
+    printf(">>>Empleados del sector>>> %s\n\n", descripcion);
 
     for(int i=0; i<listaEmpleados->len(listaEmpleados); i++)
     {
+        unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, i);
         if(unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == idSector)
         {
             printEmpleadoPorReferencia(unEmpleado, listaSectores, tamSector);
@@ -472,55 +482,60 @@ void listar_x_sector(ArrayList *listaEmpleados, eSector *listaSectores, int tamS
 
 void mostrarEmpleadosMasGanadores(ArrayList* listaEmpleados, eSector* sectores, int tamSector)
 {
+    int i,j,k;
     float maxSueldo;
     char descripcion[20];
     int flag;
     eEmpleado* unEmpleado;
 
-    for(int i=0; i < tamSector; i++){
-         cargarDescripcion(sectores, tamSector, sectores[i].id, descripcion);
-         printf("Sector %s\n", descripcion);
-         flag = 0;
-        for(int j=0; j < listaEmpleados->len(listaEmpleados); j++)//busca el sueldo mas alto
+    for(i=0; i<tamSector; i++)
+    {
+        cargarDescripcion(sectores, tamSector, sectores[i].id, descripcion);
+        printf(">>Sector %s\n", descripcion);
+        flag = 0;
+
+        for(j=0; j< listaEmpleados->len(listaEmpleados); j++)//busca el sueldo mas alto
         {
             unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, j);
-            if( (unEmpleado->sueldo > maxSueldo && unEmpleado->isEmpty == 1 && unEmpleado->idSector == (sectores + i)->id) || flag == 0)
+            if((unEmpleado->sueldo > maxSueldo && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id) || (flag == 0 && unEmpleado->isEmpty == OCUPADO && unEmpleado->idSector == (sectores + i)->id));
             {
                 maxSueldo = unEmpleado->sueldo;
                 flag = 1;
             }
          }
 
-        for(int j=0; j < listaEmpleados->len(listaEmpleados); j++)// muestra los empleados con mayor sueldo
+        for(k=0; k< listaEmpleados->len(listaEmpleados); k++)// muestra los empleados con mayor sueldo
         {
-            unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, j);
-            if( unEmpleado->sueldo == maxSueldo && unEmpleado->idSector == (sectores + i)->id && unEmpleado->isEmpty== OCUPADO)
+            unEmpleado= (eEmpleado*)listaEmpleados->get(listaEmpleados, k);
+            if(unEmpleado->sueldo == maxSueldo && unEmpleado->idSector == (sectores + i)->id && unEmpleado->isEmpty== OCUPADO)
             {
-               // mostrarEmpleado(unEmpleado, sectores, tamSector);
+               printEmpleadoPorReferencia(unEmpleado, sectores, tamSector);
             }
         }
-
         printf("\n\n");
-
     }
-
 }
 
 void filtrarEmpleadosSistemas(ArrayList* listaEmpleados, eSector* sectores, int tamSector, ArrayList* lista2)
 {
     eEmpleado* unEmpleado;
 
-    for(int i=0; i> listaEmpleados->len(listaEmpleados); i++)
+    if(listaEmpleados != NULL && lista2 != NULL)
     {
-        unEmpleado= (eEmpleado*) listaEmpleados->get(listaEmpleados, i);
-
-        if(unEmpleado->idSector == 5)
+        for(int i=0; i> listaEmpleados->len(listaEmpleados); i++)
         {
-            lista2->add(lista2, unEmpleado);
+            unEmpleado= (eEmpleado*) listaEmpleados->get(listaEmpleados, i);
+
+            if(unEmpleado->idSector == 5) //SISTEMAS
+            {
+                lista2->add(lista2, unEmpleado);
+                printEmpleadoPorReferencia(listaEmpleados, sectores, tamSector);
+            }
         }
+
+        mostrarEmpleados(lista2, sectores, tamSector);
     }
 
-    mostrarEmpleados(lista2, sectores, tamSector);
 }
 
 

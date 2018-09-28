@@ -34,17 +34,18 @@ void guardarEmpleados(char* path, ArrayList* listaEmpleados);
 int buscarEmpleado(ArrayList* listaEmpleados, int legajo);
 
 void agregarEmpleado(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector);
-void cargarDescripcion(eSector sectores[], int tamSector, int idSector, char cadena[]);
+void cargarDescripcion(eSector* sectores, int tamSector, int idSector, char cadena[]);
+int elegirSector(eSector* listaSectores, int tamSector);
 
-void listar_x_sector(ArrayList *listaEmpleados, eSector *listaSectores, int tamSector);
+void listar_x_sector(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector);
 
-void id_to_sector(int id, char sector[]);
+void printEmpleadoPorReferencia(eEmpleado* unEmpleado, eSector* listaSectores, int tamSector);
+void mostrarEmpleados(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector);
 
-void printEmpleadoPorReferencia(eEmpleado* unEmpleado, eSector listaSectores[], int tamSector);
-void mostrarEmpleados(ArrayList* listaEmpleados, eSector listaSectores[], int tamSector);
+void mostrarEmpleadosMasGanadores(ArrayList* listaEmpleados, eSector* sectores, int tamSector);
 
 void eliminarEmpleado(ArrayList *listaEmpleados, eSector* listaSectores, int tamSector);
-void modificarEmpleado(ArrayList* listaEmpleados, eSector listaSectores[], int tamSector);
+void modificarEmpleado(ArrayList* listaEmpleados, eSector* listaSectores, int tamSector);
 
 int compararEmpleadosSueldo(void* x, void* y);
 int compararEmpleadosNombre(void* x, void* y);

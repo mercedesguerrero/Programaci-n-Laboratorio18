@@ -6,7 +6,6 @@
 #include "Arraylist.h"
 #include "Funciones.h"
 
-#define CANTIDAD 40
 #define CANT_SECTORES 5
 
 int main()
@@ -25,6 +24,10 @@ int main()
     if(listaEmpleados== NULL)
     {
         exit(1);
+    }
+    if(lista2== NULL)
+    {
+        printf("\nNo hay lugar en memoria para generar la segunda lista");
     }
 
     parsearEmpleados("MOCK_DATA.csv", listaEmpleados);
@@ -63,15 +66,19 @@ int main()
             case 6:
                 //LISTAR
                 //listaEmpleados->sort(listaEmpleados, compararEmpleadosSueldo, 0);
-                //listaEmpleados->sort(listaEmpleados, compararEmpleadosNombre, 1);
-                listaEmpleados->sort(listaEmpleados, compararEmpleadosGenero, 1);
+                listaEmpleados->sort(listaEmpleados, compararEmpleadosNombre, 1);
+                //listaEmpleados->sort(listaEmpleados, compararEmpleadosGenero, 1);
                 presionarContinuar();
                 break;
             case 7:
-                filtrarEmpleadosSistemas(listaEmpleados, listaSector, CANT_SECTORES, lista2);
+                mostrarEmpleadosMasGanadores(listaEmpleados, listaSector, CANT_SECTORES);
                 presionarContinuar();
                 break;
             case 8:
+                filtrarEmpleadosSistemas(listaEmpleados, listaSector, CANT_SECTORES, lista2);
+                presionarContinuar();
+                break;
+            case 9:
                 seguir = 'n';
                 guardarEmpleados("MOCK_DATA.csv", listaEmpleados);
                 break;
